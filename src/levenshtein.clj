@@ -2,7 +2,7 @@
   (:require [clojure.string :as str])
   (:gen-class))
 
-(defn levenshtein-distance-in-vector
+(defn -levenshtein-distance-in-seq
   ([] 0)
   ([xs ys] 
    (cond
@@ -11,11 +11,11 @@
      (nil? (seq ys)) (count xs)
      :else
        (if (= (last xs) (last ys))
-         (levenshtein-distance-in-vector (drop-last xs) (drop-last ys))
+         (recur (drop-last xs) (drop-last ys))
          (apply min (vector
-            (+ 1 (levenshtein-distance-in-vector (drop-last xs) ys))
-            (+ 1 (levenshtein-distance-in-vector xs (drop-last ys)))
-            (+ 1 (levenshtein-distance-in-vector (drop-last xs) (drop-last ys)))))))))
+            (+ 1 (-levenshtein-distance-in-seq (drop-last xs) ys))
+            (+ 1 (-levenshtein-distance-in-seq xs (drop-last ys)))
+            (+ 1 (-levenshtein-distance-in-seq (drop-last xs) (drop-last ys)))))))))
 
 (defn levenshtein-distance
   [f s] 
@@ -23,6 +23,4 @@
                (str/split #""))
         ys (-> s
                (str/split #""))]
-    (levenshtein-distance-in-vector xs ys)))
-
-(levenshtein-distance "hello" "heat")
+    (-levenshtein-distance-in-seq xs ys)))

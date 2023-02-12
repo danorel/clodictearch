@@ -1,11 +1,26 @@
 (ns dictsearch 
-  (:require [clojure.java.io :as io])
+  (:require [levenshtein :as metric])
   (:gen-class))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (let [filename (first args)]
-    (with-open [rdr (io/resource filename)]
-      (doseq [line (line-seq rdr)]
-        (println line)))))
+(defn -build-levenshtein-index
+  [word dictionary]
+  (reduce 
+    (fn[distance-map dictionary-word]
+      (let [distance-word (metric/levenshtein-distance word dictionary-word)]
+        (assoc distance-map distance-word (conj (get distance-map distance-word []) dictionary-word))
+    ))
+    {}
+    dictionary
+  ))
+
+(defn -find-closest-in-index
+  [levenshtein-index distance]
+    (let [closest-words (get levenshtein-index distance ())]
+      (if (nil? (seq closest-words))
+        (recur levenshtein-index (inc distance))
+        closest-words)))
+
+(defn find-closest
+  ([word dictionary]
+    (let [levenshtein-index (-build-levenshtein-index word dictionary)]
+      (-find-closest-in-index levenshtein-index 1))))

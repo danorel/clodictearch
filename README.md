@@ -1,32 +1,32 @@
 # clodictearch 
 
-FIXME: description
+Search algorithm meant for searching closest words based on Levenshtein distance
 
 ## Installation
 
-Download from http://example.com/FIXME.
+```
+git clone https://github.com/danorel/clodictearch
+```
 
 ## Usage
 
-FIXME: explanation
+1. To try a search algorithm for a small manually created dictionary of words, use:
 
-    $ java -jar .-0.1.0-standalone.jar [args]
+```
+lein run train-dict hello
+```
 
-## Options
+2. To try a search algorithm for a large English dictionary of words, use:
 
-FIXME: listing of options this app accepts.
+```
+lein run train-dict hello
+```
 
-## Examples
+3. To run tests which cover levenshtein distance evaluation and search algorithm based on Levenshtein index, use:
 
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+```
+lein test
+```
 
 ## License
 
