@@ -1,8 +1,8 @@
-(ns metrics-test 
+(ns metrics-test
   (:require [clojure.test :refer :all]
             [metrics :refer :all]))
 
-(deftest a-test
+(deftest levenshtein-distance-test 
   (testing "Levenshtein distance"
     (is (= (levenshtein-distance "hello" "heat") 3))
     (is (= (levenshtein-distance "hello" "hello") 0))

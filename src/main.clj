@@ -8,21 +8,21 @@
   (let [sym (= (type expr) clojure.lang.Symbol)]
     `(let [start# (. System (nanoTime))
            return# ~expr
-           res# (if ~sym  
-                    (resolve '~expr)  
-                    (resolve (first '~expr)))]
+           res# (if ~sym
+                  (resolve '~expr)
+                  (resolve (first '~expr)))]
        (prn (str "Timed "
-           (:name (meta res#))
-           ": " (/ (double (- (. System (nanoTime)) start#)) 1000000.0) " msecs"))
+                 (:name (meta res#))
+                 ": " (/ (double (- (. System (nanoTime)) start#)) 1000000.0) " msecs"))
        return#)))
 
 (defn -file->vec
   "Read in a file from the resources directory"
   [filename]
-    (-> filename
-        (io/resource)
-        (slurp)
-        (str/split #"\n")))
+  (-> filename
+      (io/resource)
+      (slurp)
+      (str/split #"\n")))
 
 (defn -main
   "I don't do a whole lot ... yet."
