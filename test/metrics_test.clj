@@ -1,6 +1,6 @@
-(ns levenshtein-test 
+(ns metrics-test 
   (:require [clojure.test :refer :all]
-            [levenshtein :refer :all]))
+            [metrics :refer :all]))
 
 (deftest a-test
   (testing "Levenshtein distance"

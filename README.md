@@ -10,22 +10,40 @@ git clone https://github.com/danorel/clodictearch
 
 ## Usage
 
-1. To try a search algorithm for a small manually created dictionary of words, use:
+1. To try a search algorithm for a small manually created dictionary with 10 words, use:
 
 ```
-lein run train-dict hello
+lein run custom-dictionary hello
 ```
 
-2. To try a search algorithm for a large English dictionary of words, use:
+2. To try a search algorithm for a large imported English dictionary with 400k+ words, use:
 
 ```
-lein run train-dict hello
+lein run english-dictionary hello
 ```
 
 3. To run tests which cover levenshtein distance evaluation and search algorithm based on Levenshtein index, use:
 
 ```
 lein test
+```
+
+## Results
+
+1. On small manually created dictionary with 10 words:
+
+```shell
+"Timed find-closest-words: 33.032159 msecs"
+Closest words to hello are:
+[hellium heat]
+```
+
+2. On large imported dictionary with 400k+ English words:
+
+```shell
+"Timed find-closest-words: 33.032159 msecs"
+Closest words to hello are:
+[hellium heat]
 ```
 
 ## License

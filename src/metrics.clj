@@ -1,4 +1,4 @@
-(ns levenshtein
+(ns metrics 
   (:require [clojure.string :as str])
   (:gen-class))
 

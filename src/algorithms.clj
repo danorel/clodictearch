@@ -1,26 +1,27 @@
-(ns dictsearch 
-  (:require [levenshtein :as metric])
+(ns algorithms 
+  (:require [metrics])
   (:gen-class))
 
 (defn -build-levenshtein-index
   [word dictionary]
   (reduce 
     (fn[distance-map dictionary-word]
-      (let [distance-word (metric/levenshtein-distance word dictionary-word)]
+      (let [distance-word (metrics/levenshtein-distance word dictionary-word)]
         (assoc distance-map distance-word (conj (get distance-map distance-word []) dictionary-word))
     ))
     {}
     dictionary
   ))
 
-(defn -find-closest-in-index
+(defn -find-using-levenshtein-index-per-distance
   [levenshtein-index distance]
+    "Way too slow algorithm using levenshtein index: { 'distance-1': [word1, word2, etc.] }"
     (let [closest-words (get levenshtein-index distance ())]
       (if (nil? (seq closest-words))
         (recur levenshtein-index (inc distance))
         closest-words)))
 
-(defn find-closest
+(defn find-using-levenshtein-index 
   ([word dictionary]
     (let [levenshtein-index (-build-levenshtein-index word dictionary)]
-      (-find-closest-in-index levenshtein-index 1))))
+      (-find-using-levenshtein-index-per-distance levenshtein-index 1))))
