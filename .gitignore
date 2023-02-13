@@ -22,6 +22,7 @@ pom.xml.asc
 .clj-kondo
 .lsp
 .hgignore
+.metals
 
 # Swap
 [._]*.s[a-v][a-z]

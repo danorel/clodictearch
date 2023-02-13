@@ -29,6 +29,6 @@
   [& args]
   (let [filename (first args)
         word     (second args)
-        results  (measure-time (algorithms/find-using-levenshtein-index word (-file->vec filename)))]
+        results  (measure-time (algorithms/find-using-trie word (-file->vec filename)))]
     (println "Closest words to" word "are:")
     (println results)))

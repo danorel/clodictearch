@@ -1,5 +1,6 @@
 (ns algorithms
-  (:require [clojure.string :as str]
+  (:require [clojure.string  :as str]
+            [data_structures :as ds]
             [metrics])
   (:gen-class))
 
@@ -37,9 +38,16 @@
                                    (fn [idx _] (str (subs query 0 idx) "*" (subs query (+ idx 1))))
                                    (str/split query #""))) queries)
                                (flatten)
-                               ((fn[starred-queries] (into #{} starred-queries))))]
+                               ((fn [starred-queries] (into #{} starred-queries))))]
        (recur starred-queries (inc times))))))
 
 (defn find-using-trie
   [word dictionary]
-  dictionary)
+  (let [trie    (ds/build-trie dictionary)
+        queries (-build-trie-query word)]
+    (-> (map (fn [query] (ds/find-in-trie trie query)) queries)
+        (flatten)
+        ((fn [flatten-queries] (remove nil? flatten-queries)))
+        ((fn [filtered-queries] (into #{} filtered-queries))))))
+
+(find-using-trie "hello" ["hell" "old" "halloween"])
