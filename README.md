@@ -13,13 +13,13 @@ git clone https://github.com/danorel/clodictearch
 1. To try a search algorithm for a small manually created dictionary with 10 words, use:
 
 ```
-lein run custom-dictionary hello
+lein run hello custom-dictionary output/custom
 ```
 
 2. To try a search algorithm for a large imported English dictionary with 400k+ words, use:
 
 ```
-lein run english-dictionary hello
+lein run hello english-dictionary output/english
 ```
 
 3. To run tests which cover levenshtein distance evaluation and search algorithm based on Levenshtein index, use:
@@ -33,17 +33,17 @@ lein test
 1. On small manually created dictionary with 10 words:
 
 ```shell
-"Timed find-closest-words: 33.032159 msecs"
+"Timed find-using-trie: 15.498275 msecs"
 Closest words to hello are:
-[hellium heat]
+[hell]
 ```
 
 2. On large imported dictionary with 400k+ English words:
 
 ```shell
-"Timed find-closest-words: 33.032159 msecs"
+"Timed find-using-trie: 3825.377389 msecs"
 Closest words to hello are:
-[hellium heat]
+[ell, hel]
 ```
 
 ## License

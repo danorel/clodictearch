@@ -24,11 +24,17 @@
       (slurp)
       (str/split #"\n")))
 
+(defn -vec->file
+  "Write in a file in the resources directory"
+  [filename output]
+  (io/make-parents filename)
+  (spit filename (prn-str output)))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (let [filename (first args)
-        word     (second args)
-        results  (measure-time (algorithms/find-using-trie word (-file->vec filename)))]
+  (let [[word input output & _] args
+        results  (measure-time (algorithms/find-using-trie word (-file->vec input)))]
     (println "Closest words to" word "are:")
-    (println results)))
+    (println results)
+    (-vec->file output results)))

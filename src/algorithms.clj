@@ -47,7 +47,6 @@
         queries (-build-trie-query word)]
     (-> (map (fn [query] (ds/find-in-trie trie query)) queries)
         (flatten)
-        ((fn [flatten-queries] (remove nil? flatten-queries)))
-        ((fn [filtered-queries] (into #{} filtered-queries))))))
-
-(find-using-trie "hello" ["hell" "old" "halloween"])
+        ((fn [flatten-words] (remove nil? flatten-words)))
+        ((fn [filtered-words] (into #{} filtered-words)))
+        ((fn [dictionary] (find-using-levenshtein-index word dictionary))))))

@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=vim,clojure,leiningen
 
 ### Clojure ###
+output
 pom.xml
 pom.xml.asc
 *.jar
